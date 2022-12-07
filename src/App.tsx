@@ -29,7 +29,7 @@ const App: FC = () => {
       />
       <Suspense fallback={null}>
         <Routes>
-          <Route path="/" element={<SystemLayout />}>
+          <Route path="/" element={<SystemLayout title="Dashboard" />}>
             <Route index element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/edit" element={<AddEdit />} />

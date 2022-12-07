@@ -62,3 +62,17 @@ width: 300px;
 position: absolute;
 top: 75px;
 `
+
+export const Button = styled.button`
+cursor: pointer;
+padding: 10px 35px;
+margin-top: 20px;
+background-color: lightblue;
+color: black;
+border-radius: 10px;
+font-size: 20px;
+&:hover, &:focus {
+  background-color: beige;
+}
+transition: background-color 300ms ease;
+`

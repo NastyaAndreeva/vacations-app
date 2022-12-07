@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
 import {
   LoginFormStyled,
   LoginFormTitle,
@@ -12,6 +11,7 @@ import {
   StyledCheckbox,
   ErrorMessage,
   InputContainer,
+  Button,
 } from './LoginForm.styled';
 
 const LoginSchema = Yup.object().shape({
@@ -76,18 +76,7 @@ const LoginForm: FC = () => {
             <StyledCheckbox type="checkbox" id="remember" name="remember" />
             <label htmlFor="checkbox">Remember me</label>
           </CheckboxContainer>
-          <Button
-            sx={{
-              marginBottom: 3,
-              marginTop: 3,
-              paddingLeft: 5,
-              paddingRight: 5,
-            }}
-            variant="contained"
-            type="submit"
-          >
-            Login
-          </Button>
+          <Button>Login</Button>
         </LoginFormStyled>
       )}
     </Formik>

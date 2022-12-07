@@ -6,6 +6,13 @@ declare module '@emotion/react' {
           primaryColor: string;
           accentColor: string;
       };
+      shape:{
+      }
+      transitions:{}
+      typography: {
+      }
+      components: {
+      }
   
   }
 }
