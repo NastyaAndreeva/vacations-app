@@ -13,16 +13,13 @@ const theme: Theme = {
   },
   transitions: {
     duration: {
-      // most basic recommended timing
       standard: 300,
     },
   },
   components: {
-    // Название компонента
     MuiButton: {
       styleOverrides: {
         root: {
-          // Root - стили для всех вариаций кнопки
           height: 50,
           width: 300,
           fontSize: 18,
@@ -31,7 +28,6 @@ const theme: Theme = {
         },
       },
     },
-
   },
 };
 

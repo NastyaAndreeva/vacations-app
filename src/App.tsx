@@ -3,7 +3,7 @@ import { lazy } from 'react';
 import { Suspense } from 'react';
 import { Global, css } from '@emotion/react';
 import { Route, Routes } from 'react-router-dom';
-import SystemLayout from './layout';
+import SystemLayout from './SystemLayout';
 
 const Login = lazy(() => import('./pages/LoginPage'));
 const Dashboard = lazy(() => import('./pages/DashBoard'));

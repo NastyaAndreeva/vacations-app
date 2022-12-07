@@ -13,6 +13,5 @@ declare module '@emotion/react' {
       }
       components: {
       }
-  
   }
 }
