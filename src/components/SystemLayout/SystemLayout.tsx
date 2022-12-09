@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router';
-import Header from '../components/Header';
-import Loader from '../components/Loader';
-import Container from '../components/Container';
+import Header from '../Header';
+import Loader from '../Loader';
+import Container from '../Container';
 
 interface SystemLayoutProps {
   title: string;
