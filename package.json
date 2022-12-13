@@ -1,7 +1,8 @@
 {
-  "name": "react-ts-project",
+  "name": "vacations-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://NastyaAndreeva.github.io/vacations-app/",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",

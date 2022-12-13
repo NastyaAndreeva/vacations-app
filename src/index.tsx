@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
-      <BrowserRouter>
+      <BrowserRouter basename="/vacations-app">
         <App />
       </BrowserRouter>
     </StyledEngineProvider>
