@@ -1,5 +1,12 @@
+import Container from 'components/Container';
+import NewRequest from 'components/NewRequest';
+
 const AddEdit = () => {
-  return <div>Add and edit</div>;
+  return (
+    <Container>
+      <NewRequest />
+    </Container>
+  );
 };
 
 export default AddEdit;
