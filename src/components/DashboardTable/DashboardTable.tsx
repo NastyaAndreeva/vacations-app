@@ -26,7 +26,7 @@ const rows = [
   createData('1', 'regular', '03/12/2022', '17/12/2022', 'regular'),
 ];
 
-const DashboardTable: FC<DashboardTableProps> = ({ isActual }) => {
+const DashboardTable: FC<DashboardTableProps> = () => {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">

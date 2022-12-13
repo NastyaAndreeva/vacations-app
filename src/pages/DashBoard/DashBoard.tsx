@@ -9,7 +9,12 @@ const DashBoard = () => {
 
   return (
     <Container>
-      <DashboardNavigation isActual={isActual} />
+      <DashboardNavigation
+        isActual={isActual}
+        isTable={isTable}
+        setIsActual={setIsActual}
+        setIsTable={setIsTable}
+      />
       {isTable ? <DashboardTable isActual={isActual} /> : <div>Calendar</div>}
     </Container>
   );
