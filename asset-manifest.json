@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.js": "/vacations-app/static/js/main.88f6392a.js",
+    "main.js": "/vacations-app/static/js/main.f067aa22.js",
     "static/js/747.bb67e223.chunk.js": "/vacations-app/static/js/747.bb67e223.chunk.js",
     "static/js/349.f8038223.chunk.js": "/vacations-app/static/js/349.f8038223.chunk.js",
     "static/js/59.04e95fd5.chunk.js": "/vacations-app/static/js/59.04e95fd5.chunk.js",
     "static/js/986.90b20322.chunk.js": "/vacations-app/static/js/986.90b20322.chunk.js",
     "index.html": "/vacations-app/index.html",
-    "main.88f6392a.js.map": "/vacations-app/static/js/main.88f6392a.js.map",
+    "main.f067aa22.js.map": "/vacations-app/static/js/main.f067aa22.js.map",
     "747.bb67e223.chunk.js.map": "/vacations-app/static/js/747.bb67e223.chunk.js.map",
     "349.f8038223.chunk.js.map": "/vacations-app/static/js/349.f8038223.chunk.js.map",
     "59.04e95fd5.chunk.js.map": "/vacations-app/static/js/59.04e95fd5.chunk.js.map",
     "986.90b20322.chunk.js.map": "/vacations-app/static/js/986.90b20322.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.88f6392a.js"
+    "static/js/main.f067aa22.js"
   ]
 }
