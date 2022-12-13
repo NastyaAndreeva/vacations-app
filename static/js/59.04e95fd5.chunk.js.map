@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/59.04e95fd5.chunk.js","mappings":"4KAIA,EAJgB,WACd,OAAO,yCACT,C","sources":["pages/AddEdit/AddEdit.tsx"],"sourcesContent":["const AddEdit = () => {\n  return <div>Add and edit</div>;\n};\n\nexport default AddEdit;\n"],"names":[],"sourceRoot":""}

@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkvacations_app=self.webpackChunkvacations_app||[]).push([[349],{5349:function(n,a,t){t.r(a),t.d(a,{default:function(){return c}});var u=t(184),c=function(){return(0,u.jsx)("div",{children:"DashBoard"})}}}]);
+//# sourceMappingURL=349.f8038223.chunk.js.map

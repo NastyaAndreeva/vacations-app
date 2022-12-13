@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkreact_ts_project=self.webpackChunkreact_ts_project||[]).push([[349],{5349:function(t,e,r){r.r(e),r.d(e,{default:function(){return n}});var c=r(184),n=function(){return(0,c.jsx)("div",{children:"DashBoard"})}}}]);
-//# sourceMappingURL=349.3d8d4136.chunk.js.map

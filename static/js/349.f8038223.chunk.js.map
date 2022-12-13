@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/349.f8038223.chunk.js","mappings":"6KAIA,EAJkB,WAChB,OAAO,sCACT,C","sources":["pages/DashBoard/DashBoard.tsx"],"sourcesContent":["const DashBoard = () => {\n  return <div>DashBoard</div>;\n};\n\nexport default DashBoard;\n"],"names":[],"sourceRoot":""}

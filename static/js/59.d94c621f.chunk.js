@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkreact_ts_project=self.webpackChunkreact_ts_project||[]).push([[59],{3059:function(t,e,n){n.r(e),n.d(e,{default:function(){return c}});var r=n(184),c=function(){return(0,r.jsx)("div",{children:"Add and edit"})}}}]);
-//# sourceMappingURL=59.d94c621f.chunk.js.map
