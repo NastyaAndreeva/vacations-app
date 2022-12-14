@@ -24,6 +24,15 @@ function createData(
 
 const rows = [
   createData('1', 'regular', '03/12/2022', '17/12/2022', 'regular'),
+  createData('2', 'regular', '03/12/2022', '17/12/2022', 'regular'),
+  createData('3', 'regular', '03/12/2022', '17/12/2022', 'regular'),
+  createData('4', 'regular', '03/12/2022', '17/12/2022', 'regular'),
+  createData('5', 'regular', '03/12/2022', '17/12/2022', 'regular'),
+  createData('6', 'regular', '03/12/2022', '17/12/2022', 'regular'),
+  createData('7', 'regular', '03/12/2022', '17/12/2022', 'regular'),
+  createData('8', 'regular', '03/12/2022', '17/12/2022', 'regular'),
+  createData('9', 'regular', '03/12/2022', '17/12/2022', 'regular'),
+  createData('10', 'regular', '03/12/2022', '17/12/2022', 'regular'),
 ];
 
 const DashboardTable: FC<DashboardTableProps> = () => {

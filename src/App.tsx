@@ -11,7 +11,16 @@ const Login = lazy(() => import('./pages/LoginPage'));
 const Dashboard = lazy(() => import('./pages/DashBoard'));
 const AddEdit = lazy(() => import('./pages/AddEdit'));
 
+interface Vacation {
+  id: string;
+  type: string;
+  startDate: string;
+  endDate: string;
+  note: string;
+}
+
 const App: FC = () => {
+  const vacations: Vacation[] = [];
   return (
     <div>
       <Global
@@ -36,13 +45,19 @@ const App: FC = () => {
               path="/"
               index
               element={
-                <PrivateRoute redirectTo="/login" component={<Dashboard />} />
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<Dashboard vacations={vacations} />}
+                />
               }
             />
             <Route
               path="/edit"
               element={
-                <PrivateRoute redirectTo="/login" component={<AddEdit />} />
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<AddEdit vacations={vacations} />}
+                />
               }
             />
           </Route>

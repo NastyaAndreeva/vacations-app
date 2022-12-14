@@ -1,11 +1,39 @@
-import { useState } from 'react';
+import { useState, useEffect, FC } from 'react';
+import { TOTAL_DAYS } from 'constants/index';
 import DashboardTable from 'components/DashboardTable';
 import Container from 'components/Container';
 import DashboardNavigation from 'components/DashboardNavigation';
+import Calendar from 'components/Calendar';
+import getCalendarDays from 'helpers/getCalendarDays';
 
-const DashBoard = () => {
+interface CalendarDay {
+  day: number;
+  isWeekend: boolean;
+  isToday: boolean;
+}
+
+interface Vacation {
+  id: string;
+  type: string;
+  startDate: string;
+  endDate: string;
+  note: string;
+}
+
+interface Vacations {
+  vacations: Vacation[];
+}
+
+const DashBoard: FC<Vacations> = ({ vacations }) => {
+  console.log('vacations: ', vacations);
   const [isActual, setIsActual] = useState(true);
   const [isTable, setIsTable] = useState(true);
+  const [payload, setPayload] = useState(0);
+  const [calendarDays, setCalendarDays] = useState<CalendarDay[]>([]);
+
+  useEffect(() => {
+    setCalendarDays(getCalendarDays(TOTAL_DAYS, payload).days);
+  }, [payload]);
 
   return (
     <Container>
@@ -15,7 +43,16 @@ const DashBoard = () => {
         setIsActual={setIsActual}
         setIsTable={setIsTable}
       />
-      {isTable ? <DashboardTable isActual={isActual} /> : <div>Calendar</div>}
+      {isTable ? (
+        <DashboardTable isActual={isActual} />
+      ) : (
+        <Calendar
+          calendarDays={calendarDays}
+          setPayload={setPayload}
+          currentYear={getCalendarDays(TOTAL_DAYS, payload).currentYear}
+          currentMonth={getCalendarDays(TOTAL_DAYS, payload).currentMonth}
+        />
+      )}
     </Container>
   );
 };
