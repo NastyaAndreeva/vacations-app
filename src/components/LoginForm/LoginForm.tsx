@@ -44,6 +44,8 @@ const LoginForm: FC = () => {
     };
     if (values.remember) {
       localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      sessionStorage.setItem('user', JSON.stringify(user));
     }
 
     navigate('/');
@@ -76,7 +78,7 @@ const LoginForm: FC = () => {
             <StyledCheckbox type="checkbox" id="remember" name="remember" />
             <label htmlFor="checkbox">Remember me</label>
           </CheckboxContainer>
-          <Button>Login</Button>
+          <Button type="submit">Login</Button>
         </LoginFormStyled>
       )}
     </Formik>
