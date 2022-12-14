@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import Container from 'components/Container';
+import NewRequest from 'components/NewRequest';
 
 interface Vacation {
   id: string;
@@ -13,7 +15,11 @@ interface Vacations {
 }
 
 const AddEdit: FC<Vacations> = () => {
-  return <div>Add and edit</div>;
+  return (
+    <Container>
+      <NewRequest />
+    </Container>
+  );
 };
 
 export default AddEdit;
