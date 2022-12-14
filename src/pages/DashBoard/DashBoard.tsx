@@ -14,7 +14,7 @@ interface CalendarDay {
 
 interface Vacation {
   id: string;
-  type: string;
+  vacationType: string;
   startDate: string;
   endDate: string;
   note: string;
@@ -44,7 +44,7 @@ const DashBoard: FC<Vacations> = ({ vacations }) => {
         setIsTable={setIsTable}
       />
       {isTable ? (
-        <DashboardTable isActual={isActual} />
+        <DashboardTable isActual={isActual} vacations={vacations} />
       ) : (
         <Calendar
           calendarDays={calendarDays}

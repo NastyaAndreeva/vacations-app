@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   NewRequestFormStyled,
   Input,
@@ -13,6 +13,7 @@ import {
   NotesInput,
   NotesInputContainer,
 } from './NewRequest.styled';
+import { nanoid } from 'nanoid';
 
 const NewRequestSchema = Yup.object().shape({
   vacationType: Yup.string().required('Required'),
@@ -21,6 +22,18 @@ const NewRequestSchema = Yup.object().shape({
   note: Yup.string(),
 });
 
+interface Vacation {
+  id: string;
+  vacationType: string;
+  startDate: string;
+  endDate: string;
+  note: string;
+}
+
+interface NewRequestProps {
+  vacations: Vacation[];
+}
+
 interface NewRequestFormValues {
   vacationType: string;
   startDate: string;
@@ -28,8 +41,8 @@ interface NewRequestFormValues {
   note: string;
 }
 
-const NewRequest: FC = () => {
-  //   const navigate = useNavigate();
+const NewRequest: FC<NewRequestProps> = ({ vacations }) => {
+  const navigate = useNavigate();
 
   const initialValues: NewRequestFormValues = {
     vacationType: '',
@@ -40,14 +53,15 @@ const NewRequest: FC = () => {
 
   const handleSubmit = (values: NewRequestFormValues) => {
     const vacation = {
+      id: nanoid(),
       vacationType: values.vacationType,
       startDate: values.startDate,
       endDate: values.endDate,
       note: values.note,
     };
-    console.log('vacation: ', vacation);
+    vacations.push(vacation);
 
-    // navigate('/');
+    navigate('/');
   };
 
   return (

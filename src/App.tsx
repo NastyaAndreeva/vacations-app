@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC } from 'react';
 import { lazy } from 'react';
 import { Suspense } from 'react';
 import { Global, css } from '@emotion/react';
@@ -13,7 +13,7 @@ const AddEdit = lazy(() => import('./pages/AddEdit'));
 
 interface Vacation {
   id: string;
-  type: string;
+  vacationType: string;
   startDate: string;
   endDate: string;
   note: string;
@@ -21,6 +21,7 @@ interface Vacation {
 
 const App: FC = () => {
   const vacations: Vacation[] = [];
+  console.log('App vacations: ', vacations);
   return (
     <div>
       <Global
@@ -53,6 +54,15 @@ const App: FC = () => {
             />
             <Route
               path="/edit"
+              element={
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<AddEdit vacations={vacations} />}
+                />
+              }
+            />
+            <Route
+              path="/edit:id"
               element={
                 <PrivateRoute
                   redirectTo="/login"
