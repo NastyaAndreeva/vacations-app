@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC } from 'react';
 import { lazy } from 'react';
 import { Suspense } from 'react';
 import { Global, css } from '@emotion/react';
