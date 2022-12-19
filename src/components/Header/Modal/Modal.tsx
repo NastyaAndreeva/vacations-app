@@ -1,3 +1,4 @@
+import { LOCALE_STORAGE_AUTH_KEY } from 'constants/localeStorageAuth';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ModalStyled, LogoutButton, EmailStyled } from './Modal.styled';
@@ -9,8 +10,8 @@ interface ModalProps {
 const Modal: FC<ModalProps> = ({ email }) => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    sessionStorage.removeItem('user');
+    localStorage.removeItem(LOCALE_STORAGE_AUTH_KEY);
+    sessionStorage.removeItem(LOCALE_STORAGE_AUTH_KEY);
     navigate('/login');
   };
   return (

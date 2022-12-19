@@ -1,7 +1,11 @@
 import styled from '@emotion/styled';
-import { NavLink } from 'react-router-dom';
 
-export const EditButton = styled(NavLink)`
+export const EditButton = styled.button`
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
   &:hover {
     color: tomato;
   }

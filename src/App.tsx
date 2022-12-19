@@ -45,6 +45,12 @@ const App: FC = () => {
                 <PrivateRoute redirectTo="/login" component={<AddEdit />} />
               }
             />
+            <Route
+              path="/edit:id"
+              element={
+                <PrivateRoute redirectTo="/login" component={<AddEdit />} />
+              }
+            />
           </Route>
           <Route
             path="/login"
