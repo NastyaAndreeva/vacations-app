@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkvacations_app=self.webpackChunkvacations_app||[]).push([[59],{3059:function(n,a,t){t.r(a),t.d(a,{default:function(){return u}});var e=t(184),u=function(){return(0,e.jsx)("div",{children:"Add and edit"})}}}]);
-//# sourceMappingURL=59.04e95fd5.chunk.js.map
