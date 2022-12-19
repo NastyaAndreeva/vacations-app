@@ -1,4 +1,5 @@
 import { useState, useEffect, FC } from 'react';
+import { Dayjs } from 'dayjs';
 import { TOTAL_DAYS } from 'constants/totalDays';
 import DashboardTable from 'components/DashboardTable';
 import Container from 'components/Container';
@@ -11,6 +12,7 @@ interface CalendarDay {
   day: number;
   isWeekend: boolean;
   isToday: boolean;
+  dayDayjs: Dayjs;
 }
 
 const DashBoard: FC = () => {

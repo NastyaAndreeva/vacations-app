@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { NavLink } from 'react-router-dom';
 
 export const CalendarGrid = styled.div`
   display: grid;
@@ -15,7 +16,7 @@ export const CellWrapper = styled.div`
   color: #dddcdd;
 `;
 
-export const RowInCell = styled.div`
+export const RowInCell = styled(NavLink)`
   display: flex;
   justify-content: flex-end;
 `;
