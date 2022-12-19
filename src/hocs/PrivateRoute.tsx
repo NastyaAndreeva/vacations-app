@@ -1,3 +1,4 @@
+import { LOCALE_STORAGE_AUTH_KEY } from 'constants/localeStorageAuth';
 import { Navigate } from 'react-router-dom';
 
 interface PrivateRouteProps {
@@ -10,7 +11,8 @@ function PrivateRoute({
   component: Component,
 }: PrivateRouteProps) {
   const isLoggedIn =
-    localStorage.getItem('user') || sessionStorage.getItem('user');
+    localStorage.getItem(LOCALE_STORAGE_AUTH_KEY) ||
+    sessionStorage.getItem(LOCALE_STORAGE_AUTH_KEY);
   return !isLoggedIn ? <Navigate to={redirectTo} /> : Component;
 }
 

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,26 +8,15 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { EditButton } from './DashboardTable.styled';
+import { Vacation } from 'interfaces';
 
 interface DashboardTableProps {
   isActual: boolean;
+  vacations: Vacation[];
 }
 
-function createData(
-  abscenceId: string,
-  type: string,
-  startDate: string,
-  endDate: string,
-  notes: string
-) {
-  return { abscenceId, type, startDate, endDate, notes };
-}
-
-const rows = [
-  createData('1', 'regular', '03/12/2022', '17/12/2022', 'regular'),
-];
-
-const DashboardTable: FC<DashboardTableProps> = () => {
+const DashboardTable: FC<DashboardTableProps> = ({ vacations }) => {
+  const navigate = useNavigate();
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -41,17 +31,24 @@ const DashboardTable: FC<DashboardTableProps> = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map(({ abscenceId, type, startDate, endDate, notes }) => (
-            <TableRow key={abscenceId}>
+          {vacations.map(({ id, vacationType, startDate, endDate, note }) => (
+            <TableRow key={id}>
               <TableCell component="th" scope="row">
-                {abscenceId}
+                {id}
               </TableCell>
-              <TableCell align="center">{type}</TableCell>
+              <TableCell align="center">{vacationType}</TableCell>
               <TableCell align="center">{startDate}</TableCell>
               <TableCell align="center">{endDate}</TableCell>
-              <TableCell align="center">{notes}</TableCell>
+              <TableCell align="center">{note}</TableCell>
               <TableCell align="center">
-                <EditButton to="/edit">Edit</EditButton>
+                <EditButton
+                  id={id}
+                  onClick={() => {
+                    navigate(`/edit/${id}`);
+                  }}
+                >
+                  Edit
+                </EditButton>
               </TableCell>
             </TableRow>
           ))}
