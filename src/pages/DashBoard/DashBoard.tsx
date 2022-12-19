@@ -1,10 +1,11 @@
 import { useState, useEffect, FC } from 'react';
-import { TOTAL_DAYS } from 'constants/index';
+import { TOTAL_DAYS } from 'constants/totalDays';
 import DashboardTable from 'components/DashboardTable';
 import Container from 'components/Container';
 import DashboardNavigation from 'components/DashboardNavigation';
 import Calendar from 'components/Calendar';
 import getCalendarDays from 'helpers/getCalendarDays';
+import { LOCALE_STORAGE_KEY } from 'constants/localeStorage';
 
 interface CalendarDay {
   day: number;
@@ -12,20 +13,11 @@ interface CalendarDay {
   isToday: boolean;
 }
 
-interface Vacation {
-  id: string;
-  vacationType: string;
-  startDate: string;
-  endDate: string;
-  note: string;
-}
+const DashBoard: FC = () => {
+  const vacations = JSON.parse(
+    localStorage.getItem(LOCALE_STORAGE_KEY) || '[]'
+  );
 
-interface Vacations {
-  vacations: Vacation[];
-}
-
-const DashBoard: FC<Vacations> = ({ vacations }) => {
-  console.log('vacations: ', vacations);
   const [isActual, setIsActual] = useState(true);
   const [isTable, setIsTable] = useState(true);
   const [payload, setPayload] = useState(0);

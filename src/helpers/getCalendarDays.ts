@@ -1,16 +1,15 @@
-import moment from 'moment';
+import { TOTAL_DAYS } from 'constants/totalDays';
+import dayjs from 'dayjs';
 
 const getCalendarDays = (totalDays: number, payload = 0) => {
-  moment.updateLocale('en', { week: { dow: 1 } });
-
-  const today = moment();
-  const startDate = moment()
+  const today = dayjs();
+  const startDate = dayjs()
     .add(payload, 'day')
     .startOf('month')
     .startOf('week');
-  const day = startDate.subtract(1, 'day').clone();
-  const days = [...Array(totalDays)].map(() => {
-    const currentDay = day.add(1, 'day').clone();
+
+  const days = [...Array(totalDays)].map((_, index) => {
+    const currentDay = startDate.add(1 + index, 'day');
     const isWeekend =
       Number(currentDay.day()) === 0 || Number(currentDay.day()) === 6
         ? true
@@ -26,12 +25,13 @@ const getCalendarDays = (totalDays: number, payload = 0) => {
 
     return formatedDay;
   });
-  const currentMonth = moment()
-    .add(payload / 42, 'month')
+
+  const currentMonth = dayjs()
+    .add(payload / TOTAL_DAYS, 'month')
     .startOf('month')
     .format('MMMM');
-  const currentYear = moment()
-    .add(payload / 42, 'month')
+  const currentYear = dayjs()
+    .add(payload / TOTAL_DAYS, 'month')
     .year();
   return { days, currentMonth, currentYear };
 };

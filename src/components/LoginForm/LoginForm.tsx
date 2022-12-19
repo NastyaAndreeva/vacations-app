@@ -13,6 +13,7 @@ import {
   InputContainer,
   Button,
 } from './LoginForm.styled';
+import { LOCALE_STORAGE_AUTH_KEY } from 'constants/localeStorageAuth';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -43,9 +44,9 @@ const LoginForm: FC = () => {
       password: values.password,
     };
     if (values.remember) {
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem(LOCALE_STORAGE_AUTH_KEY, JSON.stringify(user));
     } else {
-      sessionStorage.setItem('user', JSON.stringify(user));
+      sessionStorage.setItem(LOCALE_STORAGE_AUTH_KEY, JSON.stringify(user));
     }
 
     navigate('/');

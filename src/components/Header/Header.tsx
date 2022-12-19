@@ -7,6 +7,7 @@ import {
   HeaderName,
 } from './Header.styled';
 import Modal from './Modal';
+import { LOCALE_STORAGE_AUTH_KEY } from 'constants/localeStorageAuth';
 
 interface HeaderProps {
   action?: boolean;
@@ -14,7 +15,9 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ action = false, title }) => {
-  const user = localStorage.getItem('user') || sessionStorage.getItem('user');
+  const user =
+    localStorage.getItem(LOCALE_STORAGE_AUTH_KEY) ||
+    sessionStorage.getItem(LOCALE_STORAGE_AUTH_KEY);
   const email = user && JSON.parse(user).email;
   const emailSymbol = email?.slice(0, 1).toUpperCase();
   const [isOpen, setIsOpen] = useState(false);

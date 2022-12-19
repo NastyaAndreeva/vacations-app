@@ -2,22 +2,10 @@ import { FC } from 'react';
 import Container from 'components/Container';
 import NewRequest from 'components/NewRequest';
 
-interface Vacation {
-  id: string;
-  vacationType: string;
-  startDate: string;
-  endDate: string;
-  note: string;
-}
-
-interface Vacations {
-  vacations: Vacation[];
-}
-
-const AddEdit: FC<Vacations> = ({ vacations }) => {
+const AddEdit: FC = () => {
   return (
     <Container>
-      <NewRequest vacations={vacations} />
+      <NewRequest />
     </Container>
   );
 };

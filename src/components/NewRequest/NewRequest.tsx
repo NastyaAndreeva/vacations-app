@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { nanoid } from 'nanoid';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +14,7 @@ import {
   NotesInput,
   NotesInputContainer,
 } from './NewRequest.styled';
-import { nanoid } from 'nanoid';
+import { LOCALE_STORAGE_KEY } from 'constants/localeStorage';
 
 const NewRequestSchema = Yup.object().shape({
   vacationType: Yup.string().required('Required'),
@@ -22,18 +23,6 @@ const NewRequestSchema = Yup.object().shape({
   note: Yup.string(),
 });
 
-interface Vacation {
-  id: string;
-  vacationType: string;
-  startDate: string;
-  endDate: string;
-  note: string;
-}
-
-interface NewRequestProps {
-  vacations: Vacation[];
-}
-
 interface NewRequestFormValues {
   vacationType: string;
   startDate: string;
@@ -41,8 +30,12 @@ interface NewRequestFormValues {
   note: string;
 }
 
-const NewRequest: FC<NewRequestProps> = ({ vacations }) => {
+const NewRequest: FC = () => {
   const navigate = useNavigate();
+
+  const vacations = JSON.parse(
+    localStorage.getItem(LOCALE_STORAGE_KEY) || '[]'
+  );
 
   const initialValues: NewRequestFormValues = {
     vacationType: '',
@@ -60,7 +53,7 @@ const NewRequest: FC<NewRequestProps> = ({ vacations }) => {
       note: values.note,
     };
     vacations.push(vacation);
-
+    localStorage.setItem(LOCALE_STORAGE_KEY, JSON.stringify(vacations));
     navigate('/');
   };
 

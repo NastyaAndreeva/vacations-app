@@ -5,6 +5,7 @@ import {
   ControlsWrapper,
   ControlButton,
 } from './CalendarControls.styled';
+import { TOTAL_DAYS } from 'constants/totalDays';
 
 interface CalendarControlsProps {
   setPayload: React.Dispatch<React.SetStateAction<number>>;
@@ -23,11 +24,11 @@ const CalendarControls: FC<CalendarControlsProps> = ({
         {currentMonth} {currentYear}
       </CalendarTitle>
       <ControlButtons>
-        <ControlButton onClick={() => setPayload(s => s - 42)}>
+        <ControlButton onClick={() => setPayload(s => s - TOTAL_DAYS)}>
           Previous
         </ControlButton>
         <ControlButton onClick={() => setPayload(0)}>Current</ControlButton>
-        <ControlButton onClick={() => setPayload(s => s + 42)}>
+        <ControlButton onClick={() => setPayload(s => s + TOTAL_DAYS)}>
           Following
         </ControlButton>
       </ControlButtons>

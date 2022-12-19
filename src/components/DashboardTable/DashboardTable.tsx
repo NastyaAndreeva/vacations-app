@@ -8,14 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { EditButton } from './DashboardTable.styled';
-
-interface Vacation {
-  id: string;
-  vacationType: string;
-  startDate: string;
-  endDate: string;
-  note: string;
-}
+import { Vacation } from 'interfaces';
 
 interface DashboardTableProps {
   isActual: boolean;
@@ -23,7 +16,6 @@ interface DashboardTableProps {
 }
 
 const DashboardTable: FC<DashboardTableProps> = ({ vacations }) => {
-  console.log('vacations: ', vacations);
   const navigate = useNavigate();
   return (
     <TableContainer component={Paper}>
@@ -52,7 +44,7 @@ const DashboardTable: FC<DashboardTableProps> = ({ vacations }) => {
                 <EditButton
                   id={id}
                   onClick={() => {
-                    navigate('/edit');
+                    navigate(`/edit/${id}`);
                   }}
                 >
                   Edit
