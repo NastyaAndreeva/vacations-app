@@ -42,13 +42,19 @@ const App: FC = () => {
             <Route
               path="/edit"
               element={
-                <PrivateRoute redirectTo="/login" component={<AddEdit />} />
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<AddEdit isEdit={false} />}
+                />
               }
             />
             <Route
               path="/edit/:id"
               element={
-                <PrivateRoute redirectTo="/login" component={<AddEdit />} />
+                <PrivateRoute
+                  redirectTo="/login"
+                  component={<AddEdit isEdit={true} />}
+                />
               }
             />
           </Route>

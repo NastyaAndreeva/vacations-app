@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import days, { Dayjs } from 'dayjs';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -21,6 +21,12 @@ import {
 } from './NewRequest.styled';
 import { LOCALE_STORAGE_KEY } from 'constants/localeStorage';
 import { Vacation } from 'interfaces';
+import { getVacations } from 'helpers';
+
+interface NewRequestProps {
+  isEdit: boolean;
+  vacation: Vacation;
+}
 
 const NewRequestSchema = Yup.object().shape({
   vacationType: Yup.string().required('Required'),
@@ -36,57 +42,33 @@ interface NewRequestFormValues {
   note: string;
 }
 
-const NewRequest: FC = () => {
+const NewRequest: FC<NewRequestProps> = ({ isEdit, vacation }) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const isEdit = location.pathname.split('/edit/')[1];
-
-  const vacations = JSON.parse(
-    localStorage.getItem(LOCALE_STORAGE_KEY) || '[]'
-  );
+  const { id } = useParams();
+  const [vacations] = useState(getVacations());
 
   let initialValues: NewRequestFormValues = {
-    vacationType: '',
-    startDate: days(),
-    endDate: days(),
-    note: '',
+    vacationType: isEdit ? vacation?.vacationType : '',
+    startDate: isEdit ? days(vacation?.startDate) : days(),
+    endDate: isEdit ? days(vacation?.endDate) : days(),
+    note: isEdit ? vacation?.note : '',
   };
-
-  if (isEdit) {
-    const vacation: Vacation = vacations.find(
-      (el: Vacation) => String(el.id) === isEdit
-    );
-    const { vacationType, startDate, endDate, note } = vacation;
-    initialValues = {
-      vacationType: vacationType,
-      startDate: days(startDate),
-      endDate: days(endDate),
-      note: note,
-    };
-  }
 
   const handleSubmit = (values: NewRequestFormValues) => {
     const vacation = {
-      id: vacations.length + 1,
+      id: isEdit ? id : vacations.length + 1,
       vacationType: values.vacationType,
       startDate: values.startDate.format('YYYY-MM-DD'),
       endDate: values.endDate.format('YYYY-MM-DD'),
       note: values.note,
     };
+
     if (isEdit) {
-      const vacationOld: Vacation = vacations.find(
-        (el: Vacation) => String(el.id) === isEdit
-      );
-      const updatedVacation = {
-        ...vacationOld,
-        ...vacation,
-        id: vacationOld.id,
-      };
-      const id: number = Number(vacationOld.id);
-      vacations.splice(id - 1, 1, updatedVacation);
+      vacations.splice(Number(id) - 1, 1, vacation);
     } else {
       vacations.push(vacation);
     }
+
     localStorage.setItem(LOCALE_STORAGE_KEY, JSON.stringify(vacations));
 
     navigate('/');
