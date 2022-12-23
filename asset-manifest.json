@@ -1,20 +1,24 @@
 {
   "files": {
-    "main.js": "/vacations-app/static/js/main.34b9b338.js",
+    "main.js": "/vacations-app/static/js/main.ea600666.js",
     "static/js/747.953ac75d.chunk.js": "/vacations-app/static/js/747.953ac75d.chunk.js",
-    "static/js/498.fac5d0c3.chunk.js": "/vacations-app/static/js/498.fac5d0c3.chunk.js",
-    "static/js/829.a45bef9d.chunk.js": "/vacations-app/static/js/829.a45bef9d.chunk.js",
+    "static/js/272.d569067e.chunk.js": "/vacations-app/static/js/272.d569067e.chunk.js",
+    "static/js/829.c6ffa18f.chunk.js": "/vacations-app/static/js/829.c6ffa18f.chunk.js",
     "static/js/986.7b387523.chunk.js": "/vacations-app/static/js/986.7b387523.chunk.js",
-    "static/js/861.e60dfa70.chunk.js": "/vacations-app/static/js/861.e60dfa70.chunk.js",
+    "static/js/343.73f7e054.chunk.js": "/vacations-app/static/js/343.73f7e054.chunk.js",
+    "static/js/583.530f9f1a.chunk.js": "/vacations-app/static/js/583.530f9f1a.chunk.js",
+    "static/js/78.e73dd8c1.chunk.js": "/vacations-app/static/js/78.e73dd8c1.chunk.js",
     "index.html": "/vacations-app/index.html",
-    "main.34b9b338.js.map": "/vacations-app/static/js/main.34b9b338.js.map",
+    "main.ea600666.js.map": "/vacations-app/static/js/main.ea600666.js.map",
     "747.953ac75d.chunk.js.map": "/vacations-app/static/js/747.953ac75d.chunk.js.map",
-    "498.fac5d0c3.chunk.js.map": "/vacations-app/static/js/498.fac5d0c3.chunk.js.map",
-    "829.a45bef9d.chunk.js.map": "/vacations-app/static/js/829.a45bef9d.chunk.js.map",
+    "272.d569067e.chunk.js.map": "/vacations-app/static/js/272.d569067e.chunk.js.map",
+    "829.c6ffa18f.chunk.js.map": "/vacations-app/static/js/829.c6ffa18f.chunk.js.map",
     "986.7b387523.chunk.js.map": "/vacations-app/static/js/986.7b387523.chunk.js.map",
-    "861.e60dfa70.chunk.js.map": "/vacations-app/static/js/861.e60dfa70.chunk.js.map"
+    "343.73f7e054.chunk.js.map": "/vacations-app/static/js/343.73f7e054.chunk.js.map",
+    "583.530f9f1a.chunk.js.map": "/vacations-app/static/js/583.530f9f1a.chunk.js.map",
+    "78.e73dd8c1.chunk.js.map": "/vacations-app/static/js/78.e73dd8c1.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.34b9b338.js"
+    "static/js/main.ea600666.js"
   ]
 }
