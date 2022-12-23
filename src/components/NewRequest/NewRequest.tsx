@@ -23,6 +23,7 @@ import {
 import { getVacations } from 'helpers';
 import { Vacation } from 'interfaces';
 import { LOCALE_STORAGE_KEY } from 'constants/localeStorage';
+import dayjs from 'dayjs';
 
 const vacationTypes = [
   'Annual leave',
@@ -52,6 +53,9 @@ const NewRequest = () => {
   const { id } = useParams();
   const [vacationType, setVacationType] = useState('Annual leave');
   const [vacations, setVacations] = useState<Vacation[]>([]);
+
+  const maxDate = dayjs().add(365, 'days').format('YYYY-MM-DD');
+  const minDate = dayjs().format('YYYY-MM-DD');
 
   useEffect(() => {
     setVacations(getVacations());
@@ -124,6 +128,8 @@ const NewRequest = () => {
                     onChange={(value: string | null) =>
                       setFieldValue('startDate', value, true)
                     }
+                    maxDate={maxDate}
+                    minDate={minDate}
                     value={values.startDate}
                     renderInput={(params: {}) => (
                       <TextField
@@ -146,6 +152,8 @@ const NewRequest = () => {
                     onChange={(value: string | null) =>
                       setFieldValue('endDate', value, true)
                     }
+                    maxDate={maxDate}
+                    minDate={values.startDate.format('YYYY-MM-DD')}
                     value={values.endDate}
                     renderInput={(params: {}) => (
                       <TextField
