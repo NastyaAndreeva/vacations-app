@@ -1,16 +1,17 @@
-import { FC, useState } from 'react';
+import { useState, useEffect } from 'react';
 import days, { Dayjs } from 'dayjs';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import {
   NewRequestFormStyled,
-  Input,
   Label,
   ErrorMessage,
   InputContainer,
@@ -19,14 +20,18 @@ import {
   NotesInput,
   NotesInputContainer,
 } from './NewRequest.styled';
-import { LOCALE_STORAGE_KEY } from 'constants/localeStorage';
-import { Vacation } from 'interfaces';
 import { getVacations } from 'helpers';
+import { Vacation } from 'interfaces';
+import { LOCALE_STORAGE_KEY } from 'constants/localeStorage';
 
-interface NewRequestProps {
-  isEdit: boolean;
-  vacation: Vacation;
-}
+const vacationTypes = [
+  'Annual leave',
+  'Family and medical leave',
+  'Parental leave',
+  'Sick leave',
+  'Unpaid leave',
+  'Study leave',
+];
 
 const NewRequestSchema = Yup.object().shape({
   vacationType: Yup.string().required('Required'),
@@ -42,35 +47,47 @@ interface NewRequestFormValues {
   note: string;
 }
 
-const NewRequest: FC<NewRequestProps> = ({ isEdit, vacation }) => {
+const NewRequest = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [vacations] = useState(getVacations());
+  const [vacationType, setVacationType] = useState('Annual leave');
+  const [vacations, setVacations] = useState<Vacation[]>([]);
+
+  useEffect(() => {
+    setVacations(getVacations());
+  }, []);
+
+  const vacation: Vacation | undefined = vacations.find(
+    (el: Vacation) => String(el.id) === id
+  );
 
   let initialValues: NewRequestFormValues = {
-    vacationType: isEdit ? vacation?.vacationType : '',
-    startDate: isEdit ? days(vacation?.startDate) : days(),
-    endDate: isEdit ? days(vacation?.endDate) : days(),
-    note: isEdit ? vacation?.note : '',
+    vacationType: vacationType,
+    startDate: id ? days(vacation?.startDate) : days(),
+    endDate: id ? days(vacation?.endDate) : days(),
+    note: id ? vacation?.note || '' : '',
+  };
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setVacationType(event.target.value as string);
   };
 
   const handleSubmit = (values: NewRequestFormValues) => {
     const vacation = {
-      id: isEdit ? id : vacations.length + 1,
-      vacationType: values.vacationType,
+      id: id ? String(id) : String(vacations.length + 1),
+      vacationType: vacationType,
       startDate: values.startDate.format('YYYY-MM-DD'),
       endDate: values.endDate.format('YYYY-MM-DD'),
       note: values.note,
     };
 
-    if (isEdit) {
+    if (id) {
       vacations.splice(Number(id) - 1, 1, vacation);
     } else {
       vacations.push(vacation);
     }
 
     localStorage.setItem(LOCALE_STORAGE_KEY, JSON.stringify(vacations));
-
     navigate('/');
   };
 
@@ -86,14 +103,19 @@ const NewRequest: FC<NewRequestProps> = ({ isEdit, vacation }) => {
             <div>
               <InputContainer>
                 <Label htmlFor="vacationType">Vacation type</Label>
-                <Input
+                <Select
                   id="vacationType"
+                  onChange={handleChange}
                   name="vacationType"
+                  value={vacationType}
                   placeholder="Vacation type"
-                />
-                {errors.vacationType && touched.vacationType ? (
-                  <ErrorMessage>{errors.vacationType}</ErrorMessage>
-                ) : null}
+                >
+                  {vacationTypes.map(vacationType => (
+                    <MenuItem value={vacationType} key={vacationType}>
+                      {vacationType}
+                    </MenuItem>
+                  ))}
+                </Select>
               </InputContainer>
               <InputContainer>
                 <Label htmlFor="startDate">Start date</Label>

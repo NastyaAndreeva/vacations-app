@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
+import { BiArrowBack } from 'react-icons/bi';
 import Container from '../Container';
 import {
   HeaderStyled,
@@ -7,17 +8,14 @@ import {
   HeaderName,
 } from './Header.styled';
 import Modal from './Modal';
-import { LOCALE_STORAGE_AUTH_KEY } from 'constants/localeStorageAuth';
+import { useLocation, useParams } from 'react-router-dom';
+import { getUser } from 'helpers';
 
-interface HeaderProps {
-  action?: boolean;
-  title: string;
-}
-
-const Header: FC<HeaderProps> = ({ action = false, title }) => {
-  const user =
-    localStorage.getItem(LOCALE_STORAGE_AUTH_KEY) ||
-    sessionStorage.getItem(LOCALE_STORAGE_AUTH_KEY);
+const Header = () => {
+  const { id } = useParams();
+  const location = useLocation();
+  const isShowBackLink = !(location.pathname === '/');
+  const user = getUser();
   const email = user && JSON.parse(user).email;
   const emailSymbol = email?.slice(0, 1).toUpperCase();
   const [isOpen, setIsOpen] = useState(false);
@@ -25,8 +23,15 @@ const Header: FC<HeaderProps> = ({ action = false, title }) => {
   return (
     <Container>
       <HeaderStyled>
-        {action && <BackButton to="/">Back</BackButton>}
-        <HeaderTitle>{title}</HeaderTitle>
+        {isShowBackLink && (
+          <BackButton to="/">
+            <BiArrowBack size={56} />
+          </BackButton>
+        )}
+
+        <HeaderTitle>
+          {id ? `Request new request/ Edit vacation #${id}` : 'Dashboard'}
+        </HeaderTitle>
         <HeaderName onClick={() => setIsOpen(!isOpen)}>
           {emailSymbol}
           {isOpen && <Modal email={email} />}

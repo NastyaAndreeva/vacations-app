@@ -5,11 +5,9 @@ export const NewRequestFormStyled = styled(Form)`
   padding: 20px;
   margin-top: 50px;
   display: flex;
-  /* align-items: stretch; */
   flex-direction: column;
   width: 1000px;
   margin: 0 auto;
-  /* justify-content: space-between; */
 `;
 
 export const InputContainer = styled.div`

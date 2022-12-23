@@ -31,7 +31,7 @@ const App: FC = () => {
       />
       <Suspense fallback={null}>
         <Routes>
-          <Route path="/" element={<SystemLayout title="Dashboard" />}>
+          <Route path="/" element={<SystemLayout />}>
             <Route
               path="/"
               index
@@ -42,19 +42,13 @@ const App: FC = () => {
             <Route
               path="/edit"
               element={
-                <PrivateRoute
-                  redirectTo="/login"
-                  component={<AddEdit isEdit={false} />}
-                />
+                <PrivateRoute redirectTo="/login" component={<AddEdit />} />
               }
             />
             <Route
               path="/edit/:id"
               element={
-                <PrivateRoute
-                  redirectTo="/login"
-                  component={<AddEdit isEdit={true} />}
-                />
+                <PrivateRoute redirectTo="/login" component={<AddEdit />} />
               }
             />
           </Route>

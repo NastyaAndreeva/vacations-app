@@ -5,15 +5,11 @@ import Header from '../Header';
 import Loader from '../Loader';
 import Container from '../Container';
 
-interface SystemLayoutProps {
-  title: string;
-}
-
-const SystemLayout: FC<SystemLayoutProps> = ({ title }) => {
+const SystemLayout = () => {
   return (
     <>
       <Container>
-        <Header title={title} />
+        <Header />
       </Container>
       <Suspense fallback={<Loader />}>
         <Outlet />
