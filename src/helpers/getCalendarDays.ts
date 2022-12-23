@@ -19,6 +19,7 @@ const getCalendarDays = (totalDays: number, payload = 0) => {
 
     const formatedDay = {
       day: Number(currentDay.format('D')),
+      dayDayjs: currentDay,
       isWeekend,
       isToday,
     };

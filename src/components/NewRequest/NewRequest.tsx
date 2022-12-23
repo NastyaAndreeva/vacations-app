@@ -1,11 +1,17 @@
-import { FC } from 'react';
-import { nanoid } from 'nanoid';
+import { useState, useEffect } from 'react';
+import days, { Dayjs } from 'dayjs';
+import { useParams } from 'react-router-dom';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import TextField from '@mui/material/TextField';
 import { useNavigate } from 'react-router-dom';
 import {
   NewRequestFormStyled,
-  Input,
   Label,
   ErrorMessage,
   InputContainer,
@@ -14,7 +20,19 @@ import {
   NotesInput,
   NotesInputContainer,
 } from './NewRequest.styled';
+import { getVacations } from 'helpers';
+import { Vacation } from 'interfaces';
 import { LOCALE_STORAGE_KEY } from 'constants/localeStorage';
+import dayjs from 'dayjs';
+
+const vacationTypes = [
+  'Annual leave',
+  'Family and medical leave',
+  'Parental leave',
+  'Sick leave',
+  'Unpaid leave',
+  'Study leave',
+];
 
 const NewRequestSchema = Yup.object().shape({
   vacationType: Yup.string().required('Required'),
@@ -25,34 +43,54 @@ const NewRequestSchema = Yup.object().shape({
 
 interface NewRequestFormValues {
   vacationType: string;
-  startDate: string;
-  endDate: string;
+  startDate: Dayjs;
+  endDate: Dayjs;
   note: string;
 }
 
-const NewRequest: FC = () => {
+const NewRequest = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [vacationType, setVacationType] = useState('Annual leave');
+  const [vacations, setVacations] = useState<Vacation[]>([]);
 
-  const vacations = JSON.parse(
-    localStorage.getItem(LOCALE_STORAGE_KEY) || '[]'
+  const maxDate = dayjs().add(365, 'days').format('YYYY-MM-DD');
+  const minDate = dayjs().format('YYYY-MM-DD');
+
+  useEffect(() => {
+    setVacations(getVacations());
+  }, []);
+
+  const vacation: Vacation | undefined = vacations.find(
+    (el: Vacation) => String(el.id) === id
   );
 
-  const initialValues: NewRequestFormValues = {
-    vacationType: '',
-    startDate: '',
-    endDate: '',
-    note: '',
+  let initialValues: NewRequestFormValues = {
+    vacationType: vacationType,
+    startDate: id ? days(vacation?.startDate) : days(),
+    endDate: id ? days(vacation?.endDate) : days(),
+    note: id ? vacation?.note || '' : '',
+  };
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setVacationType(event.target.value as string);
   };
 
   const handleSubmit = (values: NewRequestFormValues) => {
     const vacation = {
-      id: nanoid(),
-      vacationType: values.vacationType,
-      startDate: values.startDate,
-      endDate: values.endDate,
+      id: id ? String(id) : String(vacations.length + 1),
+      vacationType: vacationType,
+      startDate: values.startDate.format('YYYY-MM-DD'),
+      endDate: values.endDate.format('YYYY-MM-DD'),
       note: values.note,
     };
-    vacations.push(vacation);
+
+    if (id) {
+      vacations.splice(Number(id) - 1, 1, vacation);
+    } else {
+      vacations.push(vacation);
+    }
+
     localStorage.setItem(LOCALE_STORAGE_KEY, JSON.stringify(vacations));
     navigate('/');
   };
@@ -63,38 +101,71 @@ const NewRequest: FC = () => {
       initialValues={initialValues}
       onSubmit={handleSubmit}
     >
-      {({ errors, touched }) => (
+      {({ errors, touched, values, setFieldValue }) => (
         <NewRequestFormStyled>
           <NewRequestContainer>
             <div>
               <InputContainer>
                 <Label htmlFor="vacationType">Vacation type</Label>
-                <Input
+                <Select
                   id="vacationType"
+                  onChange={handleChange}
                   name="vacationType"
+                  value={vacationType}
                   placeholder="Vacation type"
-                />
-                {errors.vacationType && touched.vacationType ? (
-                  <ErrorMessage>{errors.vacationType}</ErrorMessage>
-                ) : null}
+                >
+                  {vacationTypes.map(vacationType => (
+                    <MenuItem value={vacationType} key={vacationType}>
+                      {vacationType}
+                    </MenuItem>
+                  ))}
+                </Select>
               </InputContainer>
               <InputContainer>
                 <Label htmlFor="startDate">Start date</Label>
-                <Input
-                  id="startDate"
-                  name="startDate"
-                  placeholder="Start date"
-                />
-                {errors.startDate && touched.startDate ? (
-                  <ErrorMessage>{errors.startDate}</ErrorMessage>
-                ) : null}
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    onChange={(value: string | null) =>
+                      setFieldValue('startDate', value, true)
+                    }
+                    maxDate={maxDate}
+                    minDate={minDate}
+                    value={values.startDate}
+                    renderInput={(params: {}) => (
+                      <TextField
+                        error={Boolean(touched.startDate && errors.startDate)}
+                        label="Birthday"
+                        margin="normal"
+                        name="birthday"
+                        variant="standard"
+                        fullWidth
+                        {...params}
+                      />
+                    )}
+                  />
+                </LocalizationProvider>
               </InputContainer>
               <InputContainer>
                 <Label htmlFor="endDate">End date</Label>
-                <Input id="endDate" name="endDate" placeholder="End date" />
-                {errors.endDate && touched.endDate ? (
-                  <ErrorMessage>{errors.endDate}</ErrorMessage>
-                ) : null}
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                    onChange={(value: string | null) =>
+                      setFieldValue('endDate', value, true)
+                    }
+                    maxDate={maxDate}
+                    minDate={values.startDate.format('YYYY-MM-DD')}
+                    value={values.endDate}
+                    renderInput={(params: {}) => (
+                      <TextField
+                        error={Boolean(touched.endDate && errors.endDate)}
+                        margin="normal"
+                        variant="standard"
+                        fullWidth
+                        {...params}
+                      />
+                    )}
+                  />
+                </LocalizationProvider>
               </InputContainer>
             </div>
             <NotesInputContainer>
